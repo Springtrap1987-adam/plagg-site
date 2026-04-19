@@ -30,42 +30,29 @@ export default function App() {
     if (form.gmail && form.username && form.password.length === 8) {
       setUser(form.username);
     } else {
-      alert("Gmail, kullanıcı adı ve 8 haneli şifre gerekli!");
+      alert("HATA: Gmail + kullanıcı adı + 8 haneli şifre gerekli!");
     }
   };
 
   const buyGame = (g) => {
     if (!library.includes(g)) {
       setLibrary([...library, g]);
-      setCheese(cheese + 300);
+      setCheese((c) => c + 300);
     }
   };
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center h-screen bg-green-100">
-        <div className="bg-white p-6 rounded-xl w-80">
-          <h1 className="text-xl font-bold mb-4">PLAGG Giriş</h1>
+      <div style={{ background: "#d1ffd1", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <div style={{ background: "white", padding: 20, borderRadius: 10, width: 300 }}>
+          <h1>🕶️ PLAGG LOGIN v2</h1>
+          <p style={{ fontSize: 12, color: "red" }}>EĞER BUNU GÖRÜYORSAN DEPLOY ÇALIŞIYOR</p>
 
-          <input
-            className="border p-2 w-full mb-2"
-            placeholder="Gmail"
-            onChange={(e) => setForm({ ...form, gmail: e.target.value })}
-          />
+          <input placeholder="Gmail" onChange={(e) => setForm({ ...form, gmail: e.target.value })} style={{ width: "100%", marginBottom: 5 }} />
+          <input placeholder="Kullanıcı adı" onChange={(e) => setForm({ ...form, username: e.target.value })} style={{ width: "100%", marginBottom: 5 }} />
+          <input placeholder="8 haneli şifre" onChange={(e) => setForm({ ...form, password: e.target.value })} style={{ width: "100%", marginBottom: 5 }} />
 
-          <input
-            className="border p-2 w-full mb-2"
-            placeholder="Kullanıcı Adı"
-            onChange={(e) => setForm({ ...form, username: e.target.value })}
-          />
-
-          <input
-            className="border p-2 w-full mb-2"
-            placeholder="8 haneli şifre"
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
-          />
-
-          <button onClick={login} className="bg-green-500 text-white w-full p-2 rounded">
+          <button onClick={login} style={{ width: "100%", background: "green", color: "white" }}>
             Giriş Yap
           </button>
         </div>
@@ -74,48 +61,34 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-green-50 p-4">
+    <div style={{ padding: 20, background: "#f0fff0", minHeight: "100vh" }}>
 
-      {/* TOP BAR */}
-      <div className="flex justify-between items-center bg-green-300 p-3 rounded-xl">
-        <div className="flex items-center gap-2 font-bold text-green-900">
-          🕶️ <img src="plagg.png" className="w-6 h-6" /> PLAGG
-        </div>
-
-        <div className="font-bold">
-          🧀 Peynir: {cheese}
-        </div>
+      <div style={{ display: "flex", justifyContent: "space-between", background: "#7CFC90", padding: 10, borderRadius: 10 }}>
+        <div>🕶️ PLAGG SYSTEM v2</div>
+        <div>🧀 Peynir: {cheese}</div>
       </div>
 
-      {/* OYUNLAR */}
-      <h2 className="text-xl font-bold mt-4 mb-2">Oyunlar</h2>
+      <h2>🎮 OYUN MAĞAZASI</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
         {games.map((g) => (
-          <div key={g} className="bg-white p-3 rounded-xl shadow">
-            <p className="font-bold">{g}</p>
-            <p className="text-sm">100 TL / 300 🧀 (ücretsiz sistem)</p>
-
-            <button
-              className="bg-green-500 text-white w-full mt-2 p-1 rounded"
-              onClick={() => buyGame(g)}
-            >
-              Satın Al
+          <div key={g} style={{ background: "white", padding: 10, borderRadius: 10 }}>
+            <h4>{g}</h4>
+            <p>300 🧀 kazan</p>
+            <button onClick={() => buyGame(g)} style={{ background: "black", color: "white", width: "100%" }}>
+              SATIN AL
             </button>
           </div>
         ))}
       </div>
 
-      {/* KÜTÜPHANE */}
-      <h2 className="text-xl font-bold mt-6 mb-2">Kütüphane</h2>
+      <h2>📚 KÜTÜPHANE</h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
         {library.map((g) => (
-          <div key={g} className="bg-green-200 p-3 rounded-xl">
-            <p className="font-bold">{g}</p>
-            <button className="bg-black text-white w-full mt-2 p-1 rounded">
-              Oyna
-            </button>
+          <div key={g} style={{ background: "#caffca", padding: 10, borderRadius: 10 }}>
+            <h4>{g}</h4>
+            <button style={{ width: "100%" }}>▶ OYNA</button>
           </div>
         ))}
       </div>
